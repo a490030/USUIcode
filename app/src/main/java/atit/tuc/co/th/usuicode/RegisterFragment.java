@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -62,6 +63,25 @@ public class RegisterFragment extends Fragment {
             MyAlert myAlert = new MyAlert(getActivity());
             myAlert.normalDialog("Have Space", "Please fill every blank");
         } else {
+            // No Space
+            try {
+                MyConstant myConstant = new MyConstant();
+                AddUserToServer addUserToServer = new AddUserToServer(getActivity());
+                addUserToServer.execute(nameString, userString, passwordString, myConstant.getUrlAddUserString());
+
+                String returnFromPHP = addUserToServer.get();
+
+                Log.d("29novV1", "Result=" + returnFromPHP);
+
+                if (Boolean.parseBoolean(returnFromPHP)) {
+                    getActivity().getSupportFragmentManager().popBackStack();
+                } else {
+                    MyAlert myAlert = new MyAlert(getActivity());
+                    myAlert.normalDialog("Cannot Upload", "Please try again");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
 
