@@ -71,7 +71,7 @@ public class RegisterFragment extends Fragment {
 
                 String returnFromPHP = addUserToServer.get();
 
-                Log.d("29novV1", "Result=" + returnFromPHP);
+                //Log.d("29novV1", "Result=" + returnFromPHP);
 
                 if (Boolean.parseBoolean(returnFromPHP)) {
                     getActivity().getSupportFragmentManager().popBackStack();
