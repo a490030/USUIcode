@@ -1,6 +1,7 @@
 package atit.tuc.co.th.usuicode;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -66,7 +67,9 @@ public class MainFragment extends Fragment {
                             JSONArray jsonArray = new JSONArray(jsonString);
                             JSONObject jsonObject = jsonArray.getJSONObject(0);
                             if (passwordString.equals(jsonObject.getString("password"))) {
-
+                                Intent intent = new Intent(getActivity(), ServiceActivity.class); // Intent
+                                startActivity(intent);
+                                getActivity().finish(); // Finish Activity
                             } else {
                                 MyAlert myAlert = new MyAlert(getActivity());
                                 myAlert.normalDialog("Password False", "Please try again");
